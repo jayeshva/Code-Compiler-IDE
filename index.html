@@ -36,10 +36,7 @@
                 <div class="col-12 w-25">
                     <label class="visually-hidden" for="inlineFormSelectPref">Preference</label>
                     <select class="form-select" id="inlineFormSelectPref">
-                        <option selected>Language...</option>
-                        <option value="Java">Java</option>
-                        <option value="Cpp">Cpp</option>
-                        <option value="Python">Python</option>
+                        <option selected value="Python">PYTHON</option>
                     </select>
                 </div>
                 <div class="col-12 w-25">
@@ -87,15 +84,9 @@
     editor.setSize(0.7 * width, "500")
     var option = document.getElementById("inlineFormSelectPref")
     option.addEventListener("change", function () {
-        if (option.value == "Java") {
-            editor.setOption("mode", "text/x-java")
-        }
-        else if (option.value == "python") {
+      if (option.value == "Python") {
             editor.setOption("mode", "text/x-python")
-        }
-        else {
-            editor.setOption("mode", "text/x-c++src")
-        }
+      }
     })
     var optiontheme = document.getElementById("inlineFormtheme")
     optiontheme.addEventListener("change", function () {
