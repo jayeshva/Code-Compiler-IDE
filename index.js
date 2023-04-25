@@ -20,7 +20,7 @@ app.post("/compile", function (req, res) {
 
         if (lang == "Cpp") {
             if (!input) {
-                var envData = { OS: "windows", cmd: "g++", options: { timeout: 10000 } }; // (uses g++ command to compile )
+                var envData = { OS: "linux", cmd: "gcc", options: { timeout: 10000 } }; // (uses g++ command to compile )
                 compiler.compileCPP(envData, code, function (data) {
                     if (data.output) {
                         res.send(data);
@@ -31,7 +31,7 @@ app.post("/compile", function (req, res) {
                 });
             }
             else {
-                var envData = { OS: "windows", cmd: "g++", options: { timeout: 10000 } }; // (uses g++ command to compile )
+                var envData = { OS: "linux", cmd: "gcc", options: { timeout: 10000 } }; // (uses g++ command to compile )
                 compiler.compileCPPWithInput(envData, code, input, function (data) {
                     if (data.output) {
                         res.send(data);
@@ -44,7 +44,7 @@ app.post("/compile", function (req, res) {
         }
         else if (lang == "Java") {
             if (!input) {
-                var envData = { OS: "windows" };
+                var envData = { OS: "linux" };
                 compiler.compileJava(envData, code, function (data) {
                     if (data.output) {
                         res.send(data);
@@ -56,7 +56,7 @@ app.post("/compile", function (req, res) {
             }
             else {
                 //if windows  
-                var envData = { OS: "windows" };
+                var envData = { OS: "linux" };
                 //else
                 compiler.compileJavaWithInput(envData, code, input, function (data) {
                     if (data.output) {
