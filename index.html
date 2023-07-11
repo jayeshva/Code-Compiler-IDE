@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kalvium IDE</title>
-    <link rel="icon" href="https://kalvium.com/wp-content/uploads/2022/07/fav-300x300.png" type="image/icon type">
+    <title>SKASC IDE</title>
+    <link rel="icon" href="https://www.srikrishna.ac.in/images/Institution-Logo.png" type="image/icon type" >
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
@@ -18,64 +18,302 @@
     <script src="codemirror-5.65.12/lib/codemirror.js"></script>
     <script src="codemirror-5.65.12/mode/clike/clike.js"></script>
     <link rel="stylesheet" href="codemirror-5.65.12/theme/eclipse.css">
+    <link rel="stylesheet" href="codemirror-5.65.12/theme/cobalt.css">
+    <link rel="stylesheet" href="codemirror-5.65.12/theme/dracula.css">
+    <link rel="stylesheet" href="codemirror-5.65.12/theme/eclipse.css">
+    <link rel="stylesheet" href="codemirror-5.65.12/theme/elegant.css">
+    <link rel="stylesheet" href="codemirror-5.65.12/theme/icecoder.css">
+    <link rel="stylesheet" href="codemirror-5.65.12/theme/lucario.css">
+    <link rel="stylesheet" href="codemirror-5.65.12/theme/material-darker.css">
+    <link rel="stylesheet" href="codemirror-5.65.12/theme/material-ocean.css">
+    <link rel="stylesheet" href="codemirror-5.65.12/theme/material-palenight.css">
+    <link rel="stylesheet" href="codemirror-5.65.12/theme/night.css">
+    <link rel="stylesheet" href="codemirror-5.65.12/theme/panda-syntax.css">
+    <link rel="stylesheet" href="codemirror-5.65.12/theme/rubyblue.css">
+    <link rel="stylesheet" href="codemirror-5.65.12/theme/twilight.css">
+    <link rel="stylesheet" href="codemirror-5.65.12/theme/yeti.css">
+    <link rel="stylesheet" href="codemirror-5.65.12/theme/zenburn.css">
+    <link rel="stylesheet" href="codemirror-5.65.12/theme/yonce.css">
+    <link rel="stylesheet" href="codemirror-5.65.12/theme/elegant.css">
+    <link rel="stylesheet" href="codemirror-5.65.12/theme/idea.css">
     <link rel="stylesheet" href="codemirror-5.65.12/theme/dracula.css">
     <link rel="stylesheet" href="codemirror-5.65.12/theme/lucario.css">
-    <link rel="stylesheet" href="codemirror-5.65.12/theme/icecoder.css">
     <link rel="stylesheet" href="codemirror-5.65.12/theme/neo.css">
     <link rel="stylesheet" href="codemirror-5.65.12/theme/cobalt.css">
+
+    <script src="codemirror-5.65.12/addon/edit/matchbrackets.js"></script>
+    <script src="codemirror-5.65.12/addon/edit/matchtags.js"></script>
+    <script src="codemirror-5.65.12/addon/edit/closetag.js"></script>
     <script src="codemirror-5.65.12/addon/edit/closebrackets.js"></script>
+    <script src="codemirror-5.65.12/addon/hint/anyword-hint.js"></script>
+    <script src="codemirror-5.65.12/addon/hint/show-hint.js"></script>
+    <link rel="stylesheet" href="codemirror-5.65.12/addon/hint/show-hint.css">
+    <style>
+        #colorLine {
+            display: flex; 
+            justify-content:space-evenly; 
+            width: 400px;
+            margin-top: 50px; 
+        }
+        @media(max-width: 600px) {
+            #colorLine {
+                display: none;
+            }
+            
+ 
+}
+#load {
+    display: none;
+  position: fixed;
+  top: 54%;
+  left: 40%;
+  transform: translate(-50%, -50%);
+  width: 140px;
+  height: 140px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  z-index: 9999;
+}
+
+@keyframes spin {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+#run{
+   background-color: rgb(255, 255, 255);
+   border-color: rgb(0, 0, 0);
+   border-width: 1.5px;
+}
+#run:hover{
+    
+    border-color: rgb(220, 20, 210);
+    
+}
+    </style>
+    
+
+<script>
+    window.onload = function() {
+        editor.setValue("#include <stdio.h>\nint main(){\n\tprintf(\"Hello World\");\n\treturn 0;\n}");
+
+    }
+        function changeTheme(theme) {
+            editor.setOption("theme", theme);
+            console.log(theme); 
+        }
+        function programTemplate(){
+            var lang = document.getElementById("inlineFormSelectPref").value;
+            
+            if(lang=="Python"){
+                editor.setValue("print(\"Hello World\")");
+            }
+            else if(lang=="Cpp"){
+                editor.setValue("#include <iostream>\nusing namespace std;\nint main(){\n\tcout<<\"Hello World\";\n\treturn 0;\n}");
+
+            }
+            else if(lang=="Java"){
+                editor.setValue("class Main{\n\tpublic static void main(String[] args){\n\t\tSystem.out.println(\"Hello World\");\n\t}\n}");
+            }
+            else if(lang=="C"){
+                editor.setValue("#include <stdio.h>\nint main(){\n\tprintf(\"Hello World\");\n\treturn 0;\n}");
+            }
+
+
+        }
+        function changeColor(color){
+            var sideBox = document.getElementById("sideBox");
+            var mainBox = document.getElementById("mainBox");
+            if(color=="Blue"){
+                temp="rgb(62, 162, 159)";
+                mainBox.style.backgroundColor = temp;
+                sideBox.style.backgroundColor = temp;
+            }
+            else if(color=="Green"){
+                temp="rgb(102, 198, 94)";
+                mainBox.style.backgroundColor = temp;
+                sideBox.style.backgroundColor = temp;
+            }
+            else if(color=="Purple"){
+                temp="rgb(91, 61, 150)";
+                mainBox.style.backgroundColor = temp;
+                sideBox.style.backgroundColor = temp;
+            }
+            else if(color=="Orange"){
+                temp="rgb(253, 116, 47)";
+                mainBox.style.backgroundColor = temp;
+                sideBox.style.backgroundColor = temp;
+            }
+            else if(color=="Cyan"){
+                temp="rgb(139, 169, 93)";
+                mainBox.style.backgroundColor = temp;
+                sideBox.style.backgroundColor = temp;
+            }
+            else if(color=="Brown"){
+                temp="rgb(166, 138, 66)";
+                mainBox.style.backgroundColor = temp;
+                sideBox.style.backgroundColor = temp;
+            }
+            else{
+                temp="rgb(62, 162, 159)";
+                mainBox.style.backgroundColor = temp;
+                sideBox.style.backgroundColor = temp;
+
+            }
+            
+        }
+    </script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 </head>
 
-<body>
+<body id="body" style="background-color: #fff;">
+    <div id="load"></div>
+
     <!-- <h2 style="text-align: center; color: chocolate;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-weight: 600;font-size: xx-larger;">Kalvium IDE</h2> -->
-    <img src="/Logo-nav.jpg" style="margin: 10px; margin-left: 30px;">
+   <div style="display: flex; flex-direction: row; justify-content: space-between;">
+    <img src="https://i.ibb.co/Y0CJfBj/bit.png" style="margin-top: 12px; margin-left: 30px;" width="109" height="95"/>
+    <div id ="colorLine" >
+        <div style="height: 35px; width: 35px; border-radius: 50%;background-color: rgb(62, 162, 159); cursor: pointer;" onclick="changeColor('Blue')"></div>
+        <div style="height: 35px; width: 35px; border-radius: 50%;background-color: rgb(102, 198, 94); cursor: pointer;" onclick="changeColor('Green')"></div>
+        <div style="height: 35px; width: 35px; border-radius: 50%;background-color: rgb(253, 116, 47);cursor: pointer;" onclick="changeColor('Orange')"></div>
+        <div style="height: 35px; width: 35px; border-radius: 50%;background-color: rgb(176, 86, 183);cursor: pointer;" onclick="changeColor('Purple')"></div>
+        <div style="height: 35px; width: 35px; border-radius: 50%;background-color: rgb(166, 138, 66);cursor: pointer;" onclick="changeColor('Brown')"></div>
+        <div style="height: 35px; width: 35px; border-radius: 50%;background-color: rgb(139, 169, 93);cursor: pointer;" onclick="changeColor('Cyan')"></div>
+    </div>
+    <img src="https://i.ibb.co/vkQdbtX/BIT-25-years.png" style="margin-top: 5px; margin-right: 15px;" width="115" height="115"/>
+   </div>
     <div class="row m-3">
-        <div class="col">
-            <div class="d-flex justify-content-between mb-2 rounded p-2"  style="background-color:rgb(253, 116, 47);">
+            <div class="col">
+             <div id="mainBox" class="d-flex justify-content-between mb-2 rounded p-2"  style="background-color:rgb(62, 162, 159);">
                 <div class="col-12 w-25">
                     <label class="visually-hidden" for="inlineFormSelectPref">Preference</label>
-                    <select class="form-select" id="inlineFormSelectPref">
-                        <option selected>Language...</option>
-                        <option value="Java">Java</option>
-                        <option value="Cpp">Cpp</option>
-                        <option value="Python">Python</option>
+                    <select class="form-select" id="inlineFormSelectPref" onchange="programTemplate()">
+                        <option selected value="C">C</option>
+                        <option  value="Cpp">Cpp</option>
+                        <option  value="Python">Python</option>
+                    </select>
+                </div>
+                <div class="col-12 w-25">
+                    <label class="visually-hidden" for="inlineFormSelectPref">Preference</label>
+                    <select class="form-select" id="colorSelect" onchange="changeColor(this.value)">
+                        <option selected value="Blue">Default Color</option>
+                        <option  value="Green">Green</option>
+                        <option  value="Purple">Purple</option>
+                        <option  value="Orange">Orange</option>
+                        <option  value="Blue">Blue</option>
+                        <option  value="Cyan">Cyan</option>
+                        <option  value="Brown">Brown</option>
                     </select>
                 </div>
                 <div class="col-12 w-25">
                     <label class="visually-hidden" for="inlineFormtheme">Preference</label>
-                    <select class="form-select" id="inlineFormtheme" >
-                        <option selected value="dracula">Theme...</option>
+                    <select class="form-select" id="inlineFormtheme" onchange="changeTheme(this.value)">
+                        <option selected value="cobalt">Theme...</option>
                         <option value="eclipse">Eclipse</option>
+                        <option value="night">Night</option>
+                        <option value="panda-syntax">Panda</option>
+                        <option value="rubyblue">Ruby</option>
+                        <option value="twilight">Twilight</option>
+                        <option value="yeti">Yeti</option>
+                        <option value="zenburn">Zenburn</option>
+                        <option value="elegant">Elegant</option>
+                        <option value="idea">Idea</option>
+                        <option value="dracula">Dracula</option>
                         <option value="neo">Neo</option>
                         <option value="cobalt">Cobalt</option>
                         <option value="icecoder">Icecoder</option>
                         <option value="lucario">Lucario</option>
+                        <option value="material-palenight">Material</option>
+                        <option value="material-darker">Material Dark</option>
+                        <option value="material-ocean">Material Ocean</option>
+                        <option value="material-palenight">Material Palenight</option>
+                        
+
+                        
                     </select>
+                </div>
+                <div style="background-color: rgb(105, 102, 102); width: 42px; border-radius: 4px; display: flex; justify-content: center;  border:solid white 0.5px;">
+                    <i class="bi bi-brightness-high-fill" id="toggleDark" style="font-size: 27px;cursor: pointer; color: yellow;" ></i>
                 </div>
                <div>
                     
-                    <button type="button" id="run" class="btn btn-success" style="background-color: rgb(243, 255, 5);border-color: crimson;border-width: 3px;"><i class="bi bi-play-fill" style="color: rgb(249, 58, 0);font-size: large;"></i></button>
+                    <button type="button" id="run" class="btn btn-success" ><i class="bi bi-play-fill" style="color: rgb(249, 58, 0);font-size: large;"></i></button>
                 </div>
             </div>
-            <textarea type="text" id="editor" class="form-control" rows="100" aria-label="First name"></textarea>
-        </div>
-        <div class="col d-flex flex-column rounded  px-4" style="background-color:rgb(253, 116, 47);">
-            <div class="h-50">
-                <label for="Input" class="text-light mt-4 mb-2" style="font-weight: bolder;">Input</label>
-                <textarea type="text" id="input" class="form-control h-75" aria-label="Last name"></textarea>
-            </div>
-            <div class="h-50">
-                <label for="Output" class="text-light mb-2" style="font-weight: bolder;">Output</label>
-                <textarea type="text" id="output" class="form-control h-75" aria-label="Last name"></textarea>
+            <div class="d-flex justify-content-between mb-2 rounded">
+                <textarea type="text" id="editor" class="form-control" rows="100" cols="1600" aria-label="First name" spellcheck="true" style="width:600px" "></textarea>
             </div>
         </div>
+            <div class="col d-flex flex-column align-items-lg-stretch rounded px-4 m-2" id="sideBox" style="background-color:rgb(62, 162, 159);">
+          
+                <div class="h-50 d-flex flex-column">
+                    <label for="Output" class="text-light mt-4 mb-2"  style="font-weight: bolder; " >Output</label>
+                    <textarea  type="text" id="output" rows="12" class="form-control h-75" aria-label="Last name" style="font-size:18px;  font-family:'Times New Roman', Times, serif ;" readonly>
+                    </textarea>
+                </div>
+                <div class="h-50 d-flex flex-column">
+                    <label for="Input" class="text-light mb-2" style="font-weight: bolder;">Input</label>
+                    <textarea type="text" id="input" style="font-size:18px;  font-family:'Times New Roman', Times, serif ;"  class="form-control h-75" aria-label="Last name" ></textarea>
+                </div>
+            </div>
+            
+        </div>
+        
     </div>
 </body>
+ 
 <script>
+const toggle = document.getElementById('toggleDark');
+
+var body= document.getElementById('body');
+            var colorSelect = document.getElementById('colorSelect');
+            var inlineFormtheme=document.getElementById('inlineFormtheme');
+            var inlineFormSelectPref=document.getElementById('inlineFormSelectPref');
+            var input=document.getElementById('input');
+            var output=document.getElementById('output');
+
+toggle.addEventListener('click', function(){
+var body= document.getElementById('body');
+    this.classList.toggle('bi-moon');
+    if(this.classList.toggle('bi-brightness-high-fill')){
+            input.style.color = '#333';
+            input.style.backgroundColor = '#fff';
+            output.style.color = '#333';
+            output.style.backgroundColor = '#fff';
+            inlineFormSelectPref.style.color = '#333';
+            inlineFormSelectPref.style.backgroundColor = '#fff';
+            inlineFormtheme.style.color = '#333';
+            inlineFormtheme.style.backgroundColor = '#fff';
+            colorSelect.style.color = '#333';
+            colorSelect.style.backgroundColor = '#fff';
+            body.style.backgroundColor = '#fff';
+            body.style.color = '#333';
+            toggle.style.color = 'yellow';
+           
+    }else{
+        input.style.color = '#fff';
+            input.style.backgroundColor = '#333';
+            output.style.color = '#fff';
+            output.style.backgroundColor = '#333';
+            inlineFormSelectPref.style.color = '#fff';
+            inlineFormSelectPref.style.backgroundColor = '#333';
+            inlineFormtheme.style.color = '#fff';
+            inlineFormtheme.style.backgroundColor = '#333';
+            colorSelect.style.color = '#fff';
+            colorSelect.style.backgroundColor = '#333';
+            body.style.setProperty('background-color', 'rgb(51, 51, 51)', 'important');
+            body.style.color = '#fff';
+            toggle.style.color = '#fff';
+    }
+});
     var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
         mode: "text/x-c++src",
-        theme: "icecoder",
+        theme:"dracula",
         lineNumbers: true,
         autoCloseBrackets: true,
 
@@ -97,45 +335,43 @@
             editor.setOption("mode", "text/x-c++src")
         }
     })
-    var optiontheme = document.getElementById("inlineFormtheme")
-    optiontheme.addEventListener("change", function () {
-        if (option.value == "dracula") {
-            editor.setOption("theme", "dracula")
-        }
-        else if (option.value == "eclipse") {
-            editor.setOption("theme", "eclipse")
-        }
-        
-        else if (option.value == "neo") {
-            editor.setOption("theme", "neo")
-        }
-        else if (option.value == "lucario") {
-            editor.setOption("theme", "lucario")
-        }
-        else if (option.value == "cobalt") {
-            editor.setOption("theme", "cobalt")
-        }
-        else if (option.value == "icecoder") {
-            editor.setOption("lucario", "icecoder")
-        }
-        
-        
-    })
     var code;
+
     run.addEventListener("click", async function () {
+        var load = document.getElementById("load")
+        load.style.display = "block"
         code = {
             code: editor.getValue(),
             input: input.value,
             lang: option.value
         }
         console.log(code)
-        var oData = await fetch("https://kalviumide.onrender.com/compile", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(code)
-        })
+        function showLoadAnimation() {
+            var load = document.getElementById("load")
+            load.style.display = "block"
+        }
+        //write a code to show loading animation during fetching
+        try{
+            var oData = await fetch("http://localhost:5055/compile", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(code)
+
+            })
+            
+            var d = await oData.json()
+            output.value = d.output
+        }
+        catch(error){
+            console.error(error)
+        }
+        finally{
+            load.style.display = "none"
+        }
+    
+        
         var d = await oData.json()
         output.value = d.output
     })

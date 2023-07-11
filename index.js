@@ -26,7 +26,7 @@ app.post("/compile", function (req, res) {
                         res.send(data);
                     }
                     else {
-                        res.send({ output: "error" })
+                        res.send({ output: data.error })
                     }
                 });
             }
@@ -37,7 +37,31 @@ app.post("/compile", function (req, res) {
                         res.send(data);
                     }
                     else {
-                        res.send({ output: "error" })
+                        res.send({ output: "ERROR CHECK YOUR CODE" })
+                    }
+                });
+            }
+        }
+        else if (lang == "C") {
+            if (!input) {
+                var envData = { OS: "windows", cmd: "g++", options: { timeout: 10000 } }; // (uses g++ command to compile )
+                compiler.compileCPP(envData, code, function (data) {
+                    if (data.output) {
+                        res.send(data);
+                    }
+                    else {
+                        res.send({ output: "ERROR CHECK YOUR CODE" })
+                    }
+                });
+            }
+            else {
+                var envData = { OS: "windows", cmd: "g++", options: { timeout: 10000 } }; // (uses g++ command to compile )
+                compiler.compileCPPWithInput(envData, code, input, function (data) {
+                    if (data.output) {
+                        res.send(data);
+                    }
+                    else {
+                        res.send({ output: "ERROR CHECK YOUR CODE" })
                     }
                 });
             }
@@ -50,7 +74,7 @@ app.post("/compile", function (req, res) {
                         res.send(data);
                     }
                     else {
-                        res.send({ output: "error" })
+                        res.send({ output: "ERROR CHECK YOUR CODE" })
                     }
                 })
             }
@@ -63,7 +87,7 @@ app.post("/compile", function (req, res) {
                         res.send(data);
                     }
                     else {
-                        res.send({ output: "error" })
+                        res.send({ output: "ERROR CHECK YOUR CODE" })
                     }
                 })
             }
@@ -76,7 +100,7 @@ app.post("/compile", function (req, res) {
                         res.send(data);
                     }
                     else {
-                        res.send({ output: "error" })
+                        res.send({ output: "ERROR CHECK YOUR CODE" })
                     }
                 });
             }
@@ -87,14 +111,14 @@ app.post("/compile", function (req, res) {
                         res.send(data);
                     }
                     else {
-                        res.send({ output: "error" })
+                        res.send({ output: "ERROR CHECK YOUR CODE" })
                     }
                 });
             }
         }
     }
     catch (e) {
-        console.log("error")
+        console.log("error issue")
     }
 })
 
